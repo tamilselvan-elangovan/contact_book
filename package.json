@@ -1,0 +1,28 @@
+{
+  "name": "phone_book",
+  "version": "1.0.0",
+  "description": "app that tell you if a number is spam, or allow you to find a person’s name by searching for their phonenumber.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon index.ts"
+  },
+  "author": "Tamil Selvan",
+  "license": "ISC",
+  "dependencies": {
+    "apache-md5": "^1.1.8",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0",
+    "sequelize": "^6.37.3",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2"
+  }
+}
