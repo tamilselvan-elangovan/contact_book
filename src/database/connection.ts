@@ -1,8 +1,8 @@
-import { user, contact_book } from "./schema";
+import { User, Contact } from "./schema";
 import { sequelize } from "./sequilize";
 
-const db_user = user
-const db_contact_book = contact_book
+const db_user = User
+const db_contact = Contact
 
 export const connect = () => {
     sequelize.authenticate().then(() => {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { sendFailureMessage } from "./responder";
+import { sendFailureMessage } from "../shared/responder";
 
 export const isFieldMissing = (req: Request, res: Response, fields: string[]) => {
     const body = req.body

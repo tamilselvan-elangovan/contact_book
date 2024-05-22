@@ -8,4 +8,4 @@ export const sendMessage = (res: Response, success: boolean,  message: string, d
 
 export const sendSuccessMessage = (res: Response, message: string) => sendMessage(res, true, message);
 export const sendSuccessData = (res: Response, message: string, data: any = null) => sendMessage(res, true, message, data)
-export const sendFailureMessage = (res: Response, message: string, statusCode: number = 200) => sendMessage(res, false, message, statusCode)
+export const sendFailureMessage = (res: Response, message: string, statusCode: number = 200) => sendMessage(res, false, message, '', statusCode)

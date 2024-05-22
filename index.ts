@@ -6,11 +6,10 @@ const app: Express = express();
 const port: number = 8000
 
 
-
 app.use(express.json())
 
-app.use('/auth', require('./src/modules/authorization/authorization_router.ts'))
-app.use('/contacts', authorization, require('./src/modules/contacts/contacts_router.ts'))
+app.use('/auth', require('./src/modules/authorization/authorization_router'))
+app.use('/contacts', authorization, require('./src/modules/contacts/contacts_router'))
 
 
 app.listen(port, async () => {

@@ -1,5 +1,5 @@
 import express from 'express'
-import controller from './authorization_controller'
+import controller from '../../modules/authorization/authorization_controller'
 
 const app = express()
 

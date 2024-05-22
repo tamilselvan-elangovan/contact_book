@@ -5,7 +5,7 @@ function generateRandomKey() {
   return [...Array(16)].map(() => Math.random().toString(36)[2]).join('');
 }
 
-export const user = sequelize.define(
+export const User = sequelize.define(
   'User',
   {
     id: {
@@ -38,15 +38,15 @@ export const user = sequelize.define(
   {
     timestamps: true,
     hooks: {
-        beforeValidate: (user: any) => {
-            user.id = generateRandomKey()
+        beforeValidate: (User: any) => {
+          User.id = generateRandomKey()
         }
     }
   },
 );
 
-export const contact_book = sequelize.define(
-  'Contact_book',
+export const Contact = sequelize.define(
+  'Contact',
   {
     id: {
       type: DataTypes.STRING,
@@ -78,8 +78,8 @@ export const contact_book = sequelize.define(
   {
     timestamps: true,
     hooks: {
-      beforeValidate: (user: any) => {
-          user.id = generateRandomKey()
+      beforeValidate: (Contact: any) => {
+        Contact.id = generateRandomKey()
       }
   }
   }
