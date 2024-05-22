@@ -19,7 +19,8 @@ class Controller {
             contact_book.update({registered: 1}, {where: {phone: data.phone}})
             sendSuccessData(res, 'User registered successfully', response)
         }).catch(error => {
-            if (error?.parent?.code === 'ER_DUP_ENTRY') sendFailureMessage(res, 'User already registered')
+            console.log(error)
+            if (error?.parent?.code === 'ER_DUP_ENTRY') sendFailureMessage(res, 'Phone number already registered')
             else sendFailureMessage(res, error.message)
         })
     }
@@ -33,12 +34,14 @@ class Controller {
         const query: any = {}
         if (phone) query['phone'] = phone
         else if (email) query['email'] = email
+        console.log(query)
         let response: any = await user.findOne({where: query})
 
-        const data = response.dataValues
+        const data = response?.dataValues
 
         console.log(data, password)
-        if (aprMd5(password, data.password) == data.password) sendSuccessData(res, 'login successfull', {token: jwt.sign({phone: data.phone, exp: Date.now()+ 24*60*60*1000}, CONSTANT.JWTKEY)})
+        if (!data) sendFailureMessage(res, 'Account not found')
+        else if (aprMd5(password, data.password) == data.password) sendSuccessData(res, 'login successfull', {token: jwt.sign({phone: data.phone, exp: Date.now()+ 24*60*60*1000}, CONSTANT.JWTKEY)})
         else sendFailureMessage(res, 'Invalid credentials')
     }
 }

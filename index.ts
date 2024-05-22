@@ -3,6 +3,7 @@ import { authorization } from "./src/shared/authorization";
 import { connect } from "./src/database/connection";
 
 const app: Express = express();
+const port: number = 8000
 
 
 
@@ -12,7 +13,7 @@ app.use('/auth', require('./src/modules/authorization/authorization_router.ts'))
 app.use('/contacts', authorization, require('./src/modules/contacts/contacts_router.ts'))
 
 
-app.listen(8080, async () => {
-  console.info(`[server]: Server is running at http://localhost:${8080}`);
+app.listen(port, async () => {
+  console.info(`[server]: Server is running at http://localhost:${port}`);
   connect()
 });

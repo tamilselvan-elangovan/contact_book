@@ -1,9 +1,18 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./sequilize";
 
+function generateRandomKey() {
+  return [...Array(16)].map(() => Math.random().toString(36)[2]).join('');
+}
+
 export const user = sequelize.define(
   'User',
   {
+    id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,7 +20,7 @@ export const user = sequelize.define(
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -27,13 +36,24 @@ export const user = sequelize.define(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    hooks: {
+        beforeValidate: (user: any) => {
+            user.id = generateRandomKey()
+        }
+    }
   },
 );
 
 export const contact_book = sequelize.define(
   'Contact_book',
   {
+    id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -56,6 +76,11 @@ export const contact_book = sequelize.define(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    hooks: {
+      beforeValidate: (user: any) => {
+          user.id = generateRandomKey()
+      }
+  }
   }
 )
