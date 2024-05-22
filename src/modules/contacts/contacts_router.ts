@@ -1,5 +1,5 @@
 import express from 'express'
-import controller from './contacts_controller'
+import controller from '../../modules/contacts/contacts_controller'
 
 const app = express()
 
