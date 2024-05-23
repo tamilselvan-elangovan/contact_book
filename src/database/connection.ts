@@ -10,7 +10,7 @@ export const connect = () => {
     }).catch(error => {
         console.log('Unable to connect to the database:', error)
     })
-    sequelize.sync({ force: true }).then(response => {
-        console.log('All models where synchronized')
-    })
+    // sequelize.sync({ force: true }).then(response => {
+    //     console.log('All models where synchronized')
+    // })
 }
