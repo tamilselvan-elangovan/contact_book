@@ -4,9 +4,16 @@ const faker = require('faker');
 const sequelize = require('../dist/src/database/sequilize.js')
 const { User, Contact } = require('../dist/src/database/schema.js');
 
+function generatePhoneNumber() {
+    const areaCode = faker.datatype.number({ min: 600, max: 999 });
+    const exchangeCode = faker.datatype.number({ min: 100, max: 999 });
+    const subscriberNumber = faker.datatype.number({ min: 1000, max: 9999 });
+    return `${areaCode}${exchangeCode}${subscriberNumber}`;
+}
+
 async function createRandomUser() {
     const name = faker.name.findName();
-    const phone = faker.phone.phoneNumberFormat();
+    const phone = generatePhoneNumber();
     const email = faker.internet.email();
     const spam = faker.datatype.number({ min: 0, max: 1 });
     const password = await bcrypt.hash('password', 10);
@@ -23,8 +30,8 @@ async function createRandomUser() {
     for (let i = 0; i < Math.floor(Math.random() * 10); i++) {
         contacts.push({
             name: faker.name.findName(),
-            phone: faker.phone.phoneNumberFormat(),
-            reference: i % 7 == 0 ? null : user.id,
+            phone: generatePhoneNumber(),
+            reference: i % 7 == 0 ? null : user.phone,
             spam: faker.datatype.number({ min: 0, max: 1 }),
         });
     }
@@ -54,7 +61,7 @@ async function populateDatabase() {
             registered: true,
             phone: user.phone,
             name: faker.name.findName(),
-            reference: i % 3 == 0 ? null : user.id,
+            reference: i % 3 == 0 ? null : user.phone,
             spam: faker.datatype.number({ min: 0, max: 1 }),
         });
     }
